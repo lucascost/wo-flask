@@ -78,20 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Function to load the most recent phone number
-    function loadLastPhoneNumber() {
-        try {
-            const savedNumbers = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            if (savedNumbers.length > 0) {
-                // Get the most recent entry (first in the array)
-                const lastEntry = savedNumbers[0];
-                return lastEntry;
-            }
-            return null;
-        } catch (error) {
-            console.error('Erro ao carregar do localstorage:', error);
-            return null;
-        }
-    }
+    
     
     // Function to load all saved contacts
     function loadAllContacts() {
