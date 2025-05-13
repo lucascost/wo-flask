@@ -78,7 +78,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Function to load the most recent phone number
-    
+    function loadLastPhoneNumber() {
+        try {
+            const savedNumbers = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            if (savedNumbers.length > 0) {
+                // Get the most recent entry (first in the array)
+                const lastEntry = savedNumbers[0];
+                return lastEntry;
+            }
+            return null;
+        } catch (error) {
+            console.error('Erro ao carregar do localstorage:', error);
+            return null;
+        }
+    }
     
     // Function to load all saved contacts
     function loadAllContacts() {
@@ -131,33 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Try to load the last saved phone number on page load
-    const lastSavedNumber = loadLastPhoneNumber();
-    if (lastSavedNumber) {
-        // Set the country code and phone number fields
-        countryCodeSelect.value = lastSavedNumber.countryCode;
-        phoneNumberInput.value = lastSavedNumber.phoneNumber;
-        
-        // If there's a contact name, check the save box and show the name
-        if (lastSavedNumber.contactName) {
-            // Check the save checkbox and explicitly show the name container
-            saveNumberCheckbox.checked = true;
-            
-            // Set the contact name
-            contactNameInput.value = lastSavedNumber.contactName;
-            
-            // Explicitly show the contact name container
-            contactNameContainer.style.display = 'block';
-            contactNameContainer.classList.remove('hidden');
-        } else {
-            // Make sure the contact name container is hidden if there's no name
-            contactNameContainer.style.display = 'none';
-            contactNameContainer.classList.add('hidden');
-        }
-        
-        // Trigger validation for the loaded phone number
-        const validationEvent = new Event('input');
-        phoneNumberInput.dispatchEvent(validationEvent);
-    }
+    contactNameContainer.style.display = 'none';
+    contactNameContainer.classList.add('hidden');
 
     // Phone number validation function
     function validatePhoneNumber(phoneNumber) {
