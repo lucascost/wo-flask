@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Agenda</title>
+    <!-- Include Pico.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <article>
+            <header>
+                <hgroup>
+                    <h1>WhatsApp Agenda</h1>
+                    <p>Gere um link direto para conversa no WhatsApp sem salvar o contato</p>
+                </hgroup>
+            </header>
+
+            <!-- Tab Navigation -->
+            <nav class="tabs-nav">
+                <ul>
+                    <li><a href="#tab-generator" id="tab-generator-link" class="active" role="tab" aria-controls="tab-generator">Gerar Link</a></li>
+                    <li><a href="#tab-saved" id="tab-saved-link" role="tab" aria-controls="tab-saved">Contatos Salvos</a></li>
+                </ul>
+            </nav>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Generate Link Tab -->
+                <section id="tab-generator" class="tab-pane active" role="tabpanel">
+                    <form id="whatsapp-form">
+                        <div class="grid">
+                            <div>
+                                <label for="country-code">Código do País</label>
+                                <select id="country-code" required aria-label="Select country code">
+                                    <option value="+1">🇺🇸 +1 (Estados Unidos)</option>
+                                    <option value="+44">🇬🇧 +44 (Reino Unido)</option>
+                                    <option value="+91">🇮🇳 +91 (Índia)</option>
+                                    <option value="+55" selected>🇧🇷 +55 (Brasil)</option>
+                                    <option value="+52">🇲🇽 +52 (México)</option>
+                                    <option value="+34">🇪🇸 +34 (Espanha)</option>
+                                    <option value="+49">🇩🇪 +49 (Alemanha)</option>
+                                    <option value="+33">🇫🇷 +33 (França)</option>
+                                    <option value="+39">🇮🇹 +39 (Itália)</option>
+                                    <option value="+7">🇷🇺 +7 (Rússia)</option>
+                                    <option value="+86">🇨🇳 +86 (China)</option>
+                                    <option value="+81">🇯🇵 +81 (Japão)</option>
+                                    <option value="+82">🇰🇷 +82 (Coreia do Sul)</option>
+                                    <option value="+61">🇦🇺 +61 (Austrália)</option>
+                                    <option value="+27">🇿🇦 +27 (África do Sul)</option>
+                                    <option value="+971">🇦🇪 +971 (Emirados Árabes)</option>
+                                    <option value="+966">🇸🇦 +966 (Arábia Saudita)</option>
+                                    <option value="+20">🇪🇬 +20 (Egito)</option>
+                                    <option value="+234">🇳🇬 +234 (Nigéria)</option>
+                                    <option value="+351">🇵🇹 +351 (Portugal)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="phone-number">Número de Telefone</label>
+                                <input 
+                                    type="tel" 
+                                    id="phone-number" 
+                                    placeholder="Digite o número sem o código do país" 
+                                    required
+                                    aria-describedby="phone-hint">
+                                <small id="phone-hint">Somente números, sem espaços ou caracteres especiais</small>
+                                <p id="validation-message" class="validation-message"></p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="message-text">Mensagem (Opcional)</label>
+                            <textarea 
+                                id="message-text" 
+                                placeholder="Digite sua mensagem aqui (opcional)"
+                                aria-describedby="message-hint"
+                                rows="3"></textarea>
+                            <small id="message-hint">Esse texto será preenchido automaticamente na mensagem do WhatsApp</small>
+                        </div>
+
+                        <div class="checkbox-wrapper">
+                            <label for="save-number">
+                                <input type="checkbox" id="save-number" name="save-number">
+                                Salvar este número para uso futuro
+                            </label>
+                            
+                            <div id="contact-name-container" class="hidden">
+                                <label for="contact-name">Nome do Contato (Opcional)</label>
+                                <input 
+                                    type="text" 
+                                    id="contact-name" 
+                                    name="contact-name"
+                                    placeholder="Digite um nome para este contato">
+                                <small>Adicionar um nome ajuda a identificar este contato depois</small>
+                            </div>
+                            
+                            <p id="save-message" class="save-message hidden">Número salvo! Ele será preenchido automaticamente na próxima visita.</p>
+                        </div>
+
+                        <button type="submit" id="generate-btn">Gerar Link do WhatsApp</button>
+                    </form>
+
+                    <div id="result-container" class="hidden">
+                        <label for="whatsapp-link">Seu Link do WhatsApp</label>
+                        <div class="grid">
+                            <input type="text" id="whatsapp-link" readonly>
+                            <button type="button" id="copy-btn" class="secondary">Copiar Link</button>
+                        </div>
+                        <button type="button" id="open-chat-btn">Abrir Conversa</button>
+                        <p id="copy-message" class="hidden">Link copiado para a área de transferência!</p>
+                    </div>
+                </section>
+
+                <!-- Saved Contacts Tab -->
+                <section id="tab-saved" class="tab-pane" role="tabpanel">
+                    <div id="saved-contacts-container">
+                        <h2>Contatos Salvos</h2>
+                        <p class="no-contacts-message">Nenhum contato salvo ainda. Use a aba Gerar Link para salvar contatos.</p>
+                        <div id="saved-contacts-list" class="hidden">
+                            <!-- Contacts will be loaded here dynamically -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="info-section">
+                <details>
+                    <summary>Como isso funciona?</summary>
+                    <p>
+                        Esta ferramenta cria um link direto para iniciar uma conversa no WhatsApp sem precisar salvar o contato no seu celular. 
+                        Basta inserir o número, adicionar uma mensagem opcional que será preenchida automaticamente no chat, gerar o link 
+                        e clicar em "Abrir Conversa" para começar a conversar imediatamente.
+                    </p>
+                </details>
+                <details>
+                    <summary>Por que usar isso?</summary>
+                    <ul>
+                        <li>Envie mensagens para empresas sem salvar o número</li>
+                        <li>Inicie conversas únicas rapidamente</li>
+                        <li>Mantenha uma lista de contatos temporária online</li>
+                    </ul>
+                </details>
+            </div>
+        </article>
+    </main>
+
+    <footer class="container">
+        <small>
+            WhatsApp Agenda - Facilita o contato com pessoas sem precisar salvar o número
+        </small>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

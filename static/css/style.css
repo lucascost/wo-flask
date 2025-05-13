@@ -1,0 +1,278 @@
+header{
+    margin-bottom: 0 !important;
+}
+
+#contact-name-container small{
+    margin-top: 0 ;
+    margin-bottom: 0 ;
+}
+/* Custom styles to enhance pico.css */
+
+/* Container adjustments */
+.container {
+    padding: 1rem;
+}
+
+/* Tab Navigation */
+.tabs-nav {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--card-border-color);
+}
+
+.tabs-nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.tabs-nav li {
+    margin-right: 0.5rem;
+}
+
+.tabs-nav a {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted-color);
+    transition: all 0.2s ease;
+}
+
+.tabs-nav a.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    font-weight: bold;
+}
+
+.tabs-nav a:hover:not(.active) {
+    color: var(--secondary-hover);
+    border-bottom-color: var(--secondary-hover);
+}
+
+/* Tab Content */
+.tab-content {
+    position: relative;
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Form styling */
+form {
+    margin-bottom: 2rem;
+}
+
+/* Textarea styling */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 1rem;
+}
+
+/* Checkbox styling */
+.checkbox-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-wrapper > label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* Contact name container */
+#contact-name-container {
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    border-left: 3px solid var(--primary);
+    background-color: var(--card-background-color);
+}
+
+#contact-name-container input {
+    margin-bottom: 0.25rem;
+}
+
+/* Validation messaging */
+.validation-message {
+    color: var(--form-element-invalid-border-color);
+    font-size: 0.875rem;
+    min-height: 1.25rem;
+    display: block;
+    margin: 0;
+}
+
+.validation-message.valid {
+    color: var(--form-element-valid-border-color);
+}
+
+/* Hidden elements */
+.hidden {
+    display: none !important;
+}
+
+/* Result container */
+#result-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+}
+
+/* Button adjustments */
+button {
+    margin-bottom: 0.5rem;
+}
+
+#open-chat-btn {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+/* Copy message notification */
+#copy-message, .save-message {
+    color: var(--form-element-valid-border-color);
+    text-align: center;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+/* Save message specific styling */
+.save-message {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+/* Saved contacts styling */
+#saved-contacts-container {
+    margin-bottom: 2rem;
+}
+
+.no-contacts-message {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: var(--card-background-color);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border-color);
+    color: var(--muted-color);
+}
+
+.contact-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    transition: all 0.2s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.contact-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+    word-break: break-word;
+}
+
+.contact-number {
+    margin: 0.25rem 0;
+    color: var(--muted-color);
+    word-break: break-word;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.contact-actions button {
+    margin: 0;
+    flex: 1;
+}
+
+.delete-contact {
+    width: fit-content;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--form-element-invalid-border-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-contact:hover {
+    color: var(--form-element-invalid-active-border-color);
+    text-decoration: underline;
+}
+
+.contact-date {
+    font-size: 0.8rem;
+    color: var(--muted-color);
+    margin-top: 0.5rem;
+}
+
+/* Info section styling */
+.info-section {
+    margin-top: 2rem;
+}
+
+details {
+    margin-bottom: 1rem;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 3rem;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* Input states */
+input:invalid {
+    border-color: var(--form-element-invalid-border-color);
+}
+
+input:valid.validated {
+    border-color: var(--form-element-valid-border-color);
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 576px) {
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+}
